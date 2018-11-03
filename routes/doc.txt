@@ -1,0 +1,46 @@
+var protobuf = require('protobufjs');  //first
+
+var protoJson = {
+    'nested': {
+        'UserInfo': {
+            'fields': {
+                'name': {
+                    "type": "string",
+                    "id": 1
+                },
+                'timestamp': {
+                    "type": "string",
+                    "id": 2
+                },
+                'Age': {
+                    "type": "string",
+                    "id": 3
+                }
+            }
+        }
+    }
+};     //schema
+
+
+
+
+
+
+var root = protobuf.Root.fromJSON(protoJson);
+var UserInfo = root.lookup('UserInfo');     //create a userinfo schema
+
+
+
+
+
+var user1 = {
+    name: 'liuyiqiao1',
+    timestamp: '111',
+    Age: '251'
+};
+var buffer1 = UserInfo.encode(user1).finish();     //with this we encode to protobuf
+
+
+
+
+UserInfo.decode(buffer1);   //decode from protobufjs
