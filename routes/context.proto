@@ -1,0 +1,7 @@
+package context;
+
+syntax = "proto3";
+
+message ContextData {
+   string nameContext = 1;
+}

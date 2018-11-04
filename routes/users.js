@@ -88,7 +88,7 @@ const path = require('path')
 //
 // });
 
-var data = [];
+
 
 router.get('/test2',function(req,res,next) {
   protobuf.load(path.resolve("./routes/awesome.proto"), function(err, root) {
@@ -98,7 +98,9 @@ router.get('/test2',function(req,res,next) {
     var AwesomeMessage = root.lookupType("awesomepackage.AwesomeMessage");   //e lidhim me ke e duam funx
 
     // Exemplary payload
-    var payload = { awesomeField: "AwesomeString",name:"nuni"};
+    var payload = { awesomeField: "AwesomeString",name:"nuni",msg: {
+      name:'nuni1'
+    } };
 
     // Encode a message to an Uint8Array (browser) or Buffer (node)
     var buffer = AwesomeMessage.encode(payload).finish();
@@ -110,8 +112,52 @@ router.get('/test2',function(req,res,next) {
 
     console.log(message);
 
+    //
+    // var messageTwo = root.lookupType("awesomepackage.NuniMessage");
+    //
+    // var dd =  {
+    //   name: 'Nuni'
+    // };
+    //
+    // var enc = messageTwo.encode(dd).finish();
+    // console.log(enc);
+    //
+    // var dec = messageTwo.decode(enc);
+    // console.log(dec);
+
 });
+
 });
+
+
+
+  router.get('/test3',function(req,res,next){
+    protobuf.load(path.resolve("./routes/data.proto"), function(err, root) {
+      if(err) throw err;
+        var DataObject = root.lookupType("cartographic.DataObject");
+
+        // Exemplary payload
+        var payload = { category: 'lolzzz',context:{
+          nameContext:'213'
+        }};
+
+        // Encode a message to an Uint8Array (browser) or Buffer (node)
+        var buffer = DataObject.encode(payload).finish();
+        console.log(buffer);
+        // ... do something with buffer
+
+        // Decode an Uint8Array (browser) or Buffer (node) to a message
+        var message = DataObject.decode(buffer);
+
+        console.log(message);
+
+      });
+
+
+
+
+  });
+
 
 
 

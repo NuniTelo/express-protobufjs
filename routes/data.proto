@@ -1,0 +1,11 @@
+package cartographic;
+
+syntax = "proto3";
+
+import "context.proto";
+
+
+message DataObject {
+  string category = 1;
+  ContextData context = 2;
+}
